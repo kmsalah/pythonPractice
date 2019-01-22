@@ -2,6 +2,10 @@ def test_string(myStr):
 	myStr += '99'
 	print("in function:" + myStr)
 
+def test_string2(myStr):
+	myStr = 'newString'
+	print(myStr)
+
 def test_list(myList):
 	myList.append(99)
 
@@ -10,6 +14,12 @@ def test_list2(myList):
 
 def test_list3(myList):
 	myList = [99,99,99,99]
+
+#passing a copy of a list
+def test_list4(myList):
+	myList += [5]
+	print("in function:")
+	print(myList)
 
 def test_int(myInt):
 	myInt += 99
@@ -25,6 +35,12 @@ testString = 'abcdef'
 print(testString)
 test_string(testString)
 print(testString)
+print('--------------------')
+
+testString2 = 'abcdef'
+print(testString2)
+test_string2(testString2)
+print(testString2)
 print('--------------------')
 
 testList = [1,2,3,4,5,6]
@@ -43,6 +59,13 @@ testList3 = [8,9,10,11,12,13]
 print(testList3)
 test_list3(testList3)
 print(testList3)
+print('--------------------')
+
+
+testList4 = [1,2,3,4,5,6]
+print(testList4)
+test_list4(testList4[:])
+print(testList4)
 print('--------------------')
 
 testInt = 0

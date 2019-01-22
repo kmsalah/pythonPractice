@@ -5,13 +5,77 @@ class BinaryTreeNode:
 		self.right = right
 
 
-	def inOrderTraversal(self, binaryTreeNode):
+	def preOrderTraversal(self, root):
+		def preHelper(node):
+			if node:
+				res.append(node.data)
+				preHelper(node.left)
+				preHelper(node.right)
 		res = []
-		if binaryTreeNode:
-			res = self.inOrderTraversal(binaryTreeNode.left)
-			res.append(binaryTreeNode.data)
-			res = res + self.inOrderTraversal(binaryTreeNode.right)
+		preHelper(root)
+		print(res)
+'''
+
+	def iterativeInOrderTraversaL(self, root):
+		res = []
+		stack = [root]
+		while stack:
+			if stack[-1].left and stack[-1].left not in res :
+				stack.append(stack[-1].left)
+				continue
+			else:
+				node = stack.pop()
+				res.append(node)
+				if node.right:
+					stack.append(node.right)
 		return res
+'''
+
+	def inOrderTraversal(self, root):
+		def inhelper(node):
+			if node:
+				inhelper(node.left)
+				res.append(node.data)
+				inhelper(node.right)
+		res = []
+		inhelper(root)
+		print(res)
+
+	def postOrderTraversal(self, root):
+		def posthelper(node):
+			if node:
+				posthelper(node.left)
+				posthelper(node.right)
+				res.append(node.data)
+		res = []
+		posthelper(root)
+		print(res)
+
+	#bfs
+	def levelOrderTraversal(self, root):
+		if root is None:
+			return
+
+		res = []
+		queue = []
+		queue.append(root)
+
+		while queue:
+			res.append(queue[0].data)
+			node = queue.pop(0)
+
+			if node.left is not None:
+				queue.append(node.left)
+
+			if node.right is not None:
+				queue.append(node.right)
+
+		print(res)
+
+
+
+
+
 
 def isSymmetric(root):
 	if root:
@@ -36,10 +100,10 @@ def pathsWithSum(root, targetSum):
 	if root is None:
 		return 0
 
-	int pathsFromRoot = countPathsWithSumFromNode(root, targetSum, 0)
+	pathsFromRoot = countPathsWithSumFromNode(root, targetSum, 0)
 
-	int pathsOnLeft = pathsWithSum(root.left, targetSum)
-	int pathsOnRight = pathsWithSum(root.right, targetSum)
+	pathsOnLeft = pathsWithSum(root.left, targetSum)
+	pathsOnRight = pathsWithSum(root.right, targetSum)
 
 	return pathsFromRoot + pathsOnLeft + pathsOnRight
 
@@ -79,6 +143,7 @@ print(isSymmetric(root))
 
 '''
 
+'''
 root = BinaryTreeNode(10)
 root.left = BinaryTreeNode(5)
 root.left.left = BinaryTreeNode(3)
@@ -86,9 +151,29 @@ root.left.left.left = BinaryTreeNode(3)
 root.left.left.right = BinaryTreeNode(-2)
 
 
+root.preOrderTraversal(root)
+root.inOrderTraversal(root)
+root.postOrderTraversal(root)
+
+'''
 
 
+root = BinaryTreeNode(10)
+root.left = BinaryTreeNode(7)
+root.left.left = BinaryTreeNode(8)
+root.left.right = BinaryTreeNode(2)
+root.left.right.right = BinaryTreeNode(4)
+root.left.right.right.left = BinaryTreeNode(20)
+root.right = BinaryTreeNode(6)
+root.right.left = BinaryTreeNode(69)
+root.right.left.left = BinaryTreeNode(5)
 
+root.preOrderTraversal(root)
+root.inOrderTraversal(root)
+#root.iterativeInOrderTraversaL(root)
+root.postOrderTraversal(root)
+
+root.levelOrderTraversal(root)
 
 
 
